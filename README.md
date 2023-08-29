@@ -9,7 +9,8 @@ golang、gorm、gin框架、zinx框架、dapr、消息队列（redis、rabbit、
 ![TCP服务器](https://github.com/wangcheng0509/car-tcp/assets/34881771/2d145e14-46ff-4ff4-9753-2eb4ce15451f)
 
 **运行说明：**
-1、IDE使用VSCode，并安装dapr扩展：
-  https://v1-5.docs.dapr.io/zh-hans/getting-started/install-dapr-selfhost/
-  https://v1-5.docs.dapr.io/zh-hans/developing-applications/ides/vscode/
+
+1、IDE使用VSCode，并安装dapr扩展：  
+  https://v1-5.docs.dapr.io/zh-hans/getting-started/install-dapr-selfhost/  
+  https://v1-5.docs.dapr.io/zh-hans/developing-applications/ides/vscode/  
 2、依次打开：tcoService、tcpConsumer、client-test、openService（对外开放终端命令下发）
