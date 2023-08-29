@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"appId": "car-tcp-service",
+			"appPort": 8999,
+			"label": "dapr-debug",
+			"type": "dapr"
+		},
+		{
+			"appId": "car-tcp-service",
+			"label": "daprd-down",
+			"type": "daprd-down"
+		}
+	]
+}

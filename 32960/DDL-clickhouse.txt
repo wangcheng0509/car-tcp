@@ -1,0 +1,418 @@
+-- `default`.alarm_log definition
+
+CREATE TABLE default.alarm_log
+(
+
+    `created_time` DateTime,
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `faultChargeableDeviceNum` Int32,
+
+    `faultChargeableDeviceList` String,
+
+    `faultDriveMotorNum` Int32,
+
+    `faultDriveMotorList` String,
+
+    `faultEngineNum` Int32,
+
+    `faultEngineList` String,
+
+    `faultOthersNum` Int32,
+
+    `faultOthersList` String,
+
+    `generalAlarmFlag` String,
+
+    `maxAlarmLevel` Int32
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.chargeabletemp_log definition
+
+CREATE TABLE default.chargeabletemp_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `number` Int32,
+
+    `data` String,
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.chargeablevoltage_log definition
+
+CREATE TABLE default.chargeablevoltage_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `number` Int32,
+
+    `data` String COMMENT '可充电储能子系统电压信息列表',
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.drivemotor_log definition
+
+CREATE TABLE default.drivemotor_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `created_time` DateTime,
+
+    `number` Int32,
+
+    `data` String
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.engine_log definition
+
+CREATE TABLE default.engine_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `crankshaftSpeed` Int32 COMMENT '曲轴转速；有效范围：0-60 000（表示0 r/min-60 000 r/min)，最小计量单元：1 r/min,
+0xFF/0xFE表示异常，0xFF,
+0xFF表示无效',
+
+    `fuelConsumption` Int32 COMMENT '燃料消耗率；有效范围:0~60 000(表示0r/min一60 000 r/min)，最小计量单元:1r/min，0xFF/OxFE表示异常，0xFF表示无效',
+
+    `status` Int32 COMMENT '发动机状态；0x01启动状态；0x02关闭状态，0xFE表示异常，0xFF表示无效',
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.extreme_log definition
+
+CREATE TABLE default.extreme_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `maxBatteryVoltage` Int32 COMMENT '电池单体电压最高值',
+
+    `maxTemp` Int32 COMMENT '最高温度值',
+
+    `maxTempProbeNo` Int32 COMMENT '最高温度探针序号',
+
+    `maxTempSubsysNo` Int32 COMMENT '最高温度子系统号',
+
+    `maxVoltageBatteryCode` Int32 COMMENT '最高电压电池单体代号',
+
+    `maxVoltageBatterySubsysNo` Int32 COMMENT '最高电压电池子系统号',
+
+    `minBatteryVoltage` Int32 COMMENT '电池单体电压最低值',
+
+    `minTemp` Int32 COMMENT '最低温度值',
+
+    `minTempProbeNo` Int32 COMMENT '最低温度探针序号',
+
+    `minTempSubsysNo` Int32 COMMENT '最低温度子系统号',
+
+    `minVoltageBatteryCode` Int32 COMMENT '最低电压电池单体代号',
+
+    `minVoltageBatterySubsysNo` Int32 COMMENT '最低电压电池子系统号',
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.fuelcell_log definition
+
+CREATE TABLE default.fuelcell_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `cellCurrent` Int32 COMMENT '燃料电池电流',
+
+    `cellVoltage` Int32 COMMENT '燃料电池电压',
+
+    `dcStatus` Int32 COMMENT '高压DC/DC状态',
+
+    `fuelConsumption` Int32 COMMENT '燃料消耗率',
+
+    `h_MaxConc` Int32 COMMENT '氢气最高浓度',
+
+    `h_ConcSensorCode` Int32 COMMENT '氢气最高浓度传感器代号',
+
+    `h_MaxPress` Int32 COMMENT '氢气最高压力',
+
+    `h_PressSensorCode` Int32 COMMENT '氢气最高压力传感器代号',
+
+    `h_MaxTemp` Int32 COMMENT '氢系统中最高温度',
+
+    `h_TempProbeCode` Int32 COMMENT '氢系统中最高温度探针代号',
+
+    `probeNum` Int32 COMMENT '燃料电池温度探针总数',
+
+    `probeTemps` String COMMENT '探针温度值',
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.location_log definition
+
+CREATE TABLE default.location_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `latitude` Int32 COMMENT '纬度；以度为单位的纬度值乘以10^6，精确到百万分之一度',
+
+    `longitude` Int32 COMMENT '经度；以度为单位的纬度值乘以10^6，精确到百万分之一度',
+
+    `status` Int32,
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.vehicle_log definition
+
+CREATE TABLE default.vehicle_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `acceleratorPedal` Int32,
+
+    `brakePedal` Int32,
+
+    `charging` Int32 COMMENT '充电；0x01;停车充电;0x02;行驶充电;0x03;未充电状态;x04:充电完成;“0xFE”表示异常，“0xFE”表示无效',
+
+    `current` Int32 COMMENT '总电流；有效值范围:0~20 000(偏移量1 000 A，表示一1000 A~+1 000 A)最小计量单元01A，“0xFFOXFE”表示异常“0xFF0xFF”表示无效',
+
+    `dc` Int32 COMMENT '0x01：工作0x02：断开，"OxFE”表示异常，"OxFF”表示无效',
+
+    `gear` Int32 COMMENT '挡位；',
+
+    `mileage` Int32 COMMENT '累计里程；有效值范围:0~9 999 999(表示0 km~999 999.9 km)最小计量单元;0.1 km\n“0xFF，0xFF，0xFF,
+OxFE”表示异常，“0xFF,
+OxFF,
+OxFF0xFF”示无效',
+
+    `mode` Int32 COMMENT '运行模式；0x01:纯电;0x02;混动;0x03:燃油;0xFE表示异常;0xFF 表示无效',
+
+    `resistance` Int32 COMMENT '绝缘电阻；有效范围0~60 000(表示 0 Q~60 000 k2)最小计量单元;1 k2',
+
+    `soc` Int32 COMMENT '有效值范围;0~100(表示 0%~100%),
+最小计量单元:1%“0xFE”表示异常“0xFF”表示无效',
+
+    `speed` Int32 COMMENT '车速；有效值范围;0~100(表示 0%~100%),
+最小计量单元:1%，“0xFE”表示异常“0xFF”表示无效',
+
+    `status` Int32 COMMENT '车辆状态；0x01:启动，0x02:熄火，0x03:其他，0xFE表示异常，0xFF表示无效',
+
+    `voltage` Int32 COMMENT '总电压；有效值范围:0~10 000(表示 0 V~1000 V)，小计量单元:0.1V，“0xFF,
+xFE”示异常，“0xFFxFF”表示无效',
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;
+
+
+-- `default`.vlogin_log definition
+
+CREATE TABLE default.vlogin_log
+(
+
+    `vin` String,
+
+    `year` Int32,
+
+    `month` Int32,
+
+    `day` Int32,
+
+    `hour` Int32,
+
+    `minutes` Int32,
+
+    `seconds` Int32,
+
+    `acceleratorPedal` Int32,
+
+    `brakePedal` Int32,
+
+    `seq` Int32 COMMENT '车辆登录的流水号',
+
+    `iccId` String COMMENT 'iccid',
+
+    `num` Int32 COMMENT '可充电储能子系统数',
+
+    `length` Int32 COMMENT '可充电储能系统编码长度',
+
+    `energyId` String COMMENT '可充电储能系统编码列表',
+
+    `created_time` DateTime
+)
+ENGINE = ReplacingMergeTree
+PARTITION BY toYYYYMM(created_time)
+ORDER BY (vin,
+ created_time)
+SETTINGS index_granularity = 8192;

@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"appId": "car-tcp-consumer",
+			"appPort": 8080,
+			"label": "dapr-debug",
+			"type": "daprd"
+		},
+		{
+			"appId": "car-tcp-consumer",
+			"label": "daprd-down",
+			"type": "daprd-down"
+		}
+	]
+}

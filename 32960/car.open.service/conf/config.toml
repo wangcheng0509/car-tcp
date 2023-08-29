@@ -1,0 +1,35 @@
+[Env]
+# enums  dev test prod
+GoEnv = "local"
+
+[HTTP]
+Port = "80"
+
+[Dapr]
+PubsubName = "rabbitmq"
+
+[Redis]
+Addr = "39.99.174.39:7379"
+Password = "pay.Media@2020#redis"
+DB = 0
+
+[MySQL]
+Type = "mysql"
+User = "sa"
+Password = "qWSxBNqb"
+Host = "rm-8vbjy34g96075qpoklo.mysql.zhangbei.rds.aliyuncs.com:3408"
+DBName = "car_broke"
+Debug = "true"
+
+[CK]
+User = "default"
+Password = "eY6GIq5KOWAz"
+Host = "dev.clickhouse.in.pay.fun"
+PortTCP = "18125"
+DBName = "default"
+DeBug = "true"
+
+
+
+
+

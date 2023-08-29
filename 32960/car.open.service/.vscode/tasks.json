@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"appId": "car-open-service",
+			"appPort": 80,
+			"label": "dapr-debug",
+			"type": "daprd"
+		},
+		{
+			"appId": "car.open.service",
+			"label": "daprd-down",
+			"type": "daprd-down"
+		}
+	]
+}
